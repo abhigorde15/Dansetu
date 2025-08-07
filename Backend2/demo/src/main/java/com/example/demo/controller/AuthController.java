@@ -45,7 +45,9 @@ public class AuthController {
     }
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
+    	System.out.println("Before going to service");
         Map<String, String> response = authService.login(user.getUsername(), user.getPassword());
+        System.out.println("After going to service");
         return ResponseEntity.ok(response);
     }
 

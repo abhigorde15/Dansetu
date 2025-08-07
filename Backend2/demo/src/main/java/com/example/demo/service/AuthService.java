@@ -56,15 +56,18 @@ public class AuthService {
 
 
     public Map<String, String> login(String username, String password) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
+    	System.out.println("Before findbyUsername");
+        User user = userRepository.findByEmail(username).get();
+        System.out.println("After findbyUsername");
+        System.out.println("user password :"+user.getPassword());
+        System.out.println("user password :"+password);
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Invalid credentials");
+        
         }
-
+        System.out.println("Before going to generate token");
         String token = jwtUtil.generateToken(user.getUsername()); // Generate JWT token
-
+        System.out.println("After going to generate token");
         // Return both token and role
         return Map.of("token", token, "role", user.getRole());
     }

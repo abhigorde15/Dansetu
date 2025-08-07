@@ -23,7 +23,7 @@ const Login = () => {
         localStorage.setItem("loggedIn",true)
         setMessage("You have logged in successfully!");
         
-        // Navigate based on role
+       
         const role = response.data.role.toLowerCase(); // Ensure case consistency
         switch (role) {
           case "donor":
